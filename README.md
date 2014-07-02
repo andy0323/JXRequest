@@ -1,6 +1,6 @@
 # JXRequest
 
-JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可以通过几个参数来控制SVProgress的Loading状态.
+JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可以通过几个参数来控制SVProgressHUD的状态(显示/不显示/自定义文字).
 
 
 ## 如何使用JXRequest (详情参考Demo)
