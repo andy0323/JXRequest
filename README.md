@@ -55,14 +55,30 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 
 创建继承于BaseRequest的请求类, 必须实现函数@selector(start)
 
+如果某些参数固定不变, 写在在@selector(start)
+
 例如:
 
 ```
 - (void)start {
-    [self.params setObject:@"金融街" forKey:@"address"];
     [self.params setObject:@"false" forKey:@"sensor"];
 
     [self startGetRequest:self.url params:self.params];
+}
+```
+
+参数正常的传入方法是写set函数
+
+```
+@property (nonatomic, copy) NSString *address;
+```
+
+重写set函数, 这样外部就可以用点语法设置参数
+
+```
+- (void)setAddress:(NSString *)address {
+    self.address = address;
+    [self.params setObject:address forKeyedSubscript:@"address"];
 }
 ```
 
@@ -75,7 +91,10 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 
 ```
 - (void)weatherRequest {
-    JXWeatherRequest *weatherRequest =[[JXWeatherRequest alloc] init];
+	
+	JXWeatherRequest *weatherRequest =[[JXWeatherRequest alloc] init];
+    
+    weatherRequest.address = @"金融街";
     
     [weatherRequest resultBlock:^(id result) {
        

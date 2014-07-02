@@ -70,6 +70,8 @@
 - (void)weatherRequest {
     JXWeatherRequest *weatherRequest =[[JXWeatherRequest alloc] init];
     
+    weatherRequest.address = @"金融街";
+    
     [weatherRequest resultBlock:^(id result) {
        
         NSLog(@"%@", result);

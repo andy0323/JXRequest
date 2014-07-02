@@ -11,4 +11,6 @@
 
 @interface JXWeatherRequest : RootRequest
 
+@property (nonatomic, copy) NSString *address;
+
 @end

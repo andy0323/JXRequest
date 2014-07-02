@@ -22,10 +22,14 @@
 }
 
 - (void)start {
-    [self.params setObject:@"金融街" forKey:@"address"];
     [self.params setObject:@"false" forKey:@"sensor"];
 
     [self startGetRequest:self.url params:self.params];
+}
+
+- (void)setAddress:(NSString *)address {
+    self.address = address;
+    [self.params setObject:address forKeyedSubscript:@"address"];
 }
 
 @end
