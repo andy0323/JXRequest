@@ -43,6 +43,9 @@
      
     return YES;
 }
-
+- (void)statusError {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"其他用户登入" delegate:nil cancelButtonTitle:@"修改密码" otherButtonTitles:@"重新登入", nil];
+    [alertView show];
+}
 
 @end
