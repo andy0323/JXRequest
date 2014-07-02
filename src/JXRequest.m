@@ -1,31 +1,26 @@
-#import "JXAppDelegate.h"
 #import "JXRequest.h"
-#import "SVProgressHUD.h"
 
-#define MESSAGE_LOAD    @"加载中.."
-#define MESSAGE_SUCCESS @"加载成功"
-#define MESSAGE_ERROR   @"加载失败"
-
-@implementation NQRootRequest
+@implementation JXRequest
 
 - (id)init {
     
     if (self = [super init]) {
         _params = [NSMutableDictionary dictionary];
         
-        // 初始化SVProgressHUD相关参数
-        
-        _displayable = YES; // 显示控件
-        _hasMessage  = YES; // 显示内容
-        
-        _loadingMessage = MESSAGE_LOAD;
-        _successMessage = MESSAGE_SUCCESS;
-        _errorMessage   = MESSAGE_ERROR;
-        
-        _keyView = ((JXAppDelegate *)[UIApplication sharedApplication].delegate).window;
+        _keyView = [UIApplication sharedApplication].delegate.window;
     }
     
     return self;
+}
+
+/**
+ *  类方法创建对象
+ *
+ *  @return 初始化对象
+ */
++ (id)request {
+    JXRequest *request = [[[self class] alloc] init];
+    return request;
 }
 
 #pragma mark -
@@ -34,14 +29,27 @@
 /**
  *  外部调用该函数, 获取解析完成的数据源
  */
-- (void)resultBlock:(void (^)(id))block {
-    self.resultBlock = block;
+- (void)successCallback:(void (^)(id))successBlock {
+    self.successBlock = successBlock;
+}
+
+- (void)errorCallback:(void (^)(NSError *error))errorBlock {
+    self.errorBlock = errorBlock;
+}
+
+- (void)successCallback:(void (^)(id))successBlock
+          errorCallback:(void (^)(NSError *error))errorBlock {
+    self.successBlock = successBlock;
+    self.errorBlock = errorBlock;
+}
+- (void)statusErrorCallback:(void (^)(NSInteger code))statusErrorBlock {
+    self.statusErrorBlock = statusErrorBlock;
 }
 
 /**
  *  开始请求
  */
-- (void)start {
+- (void)start{
 }
 
 #pragma mark -
@@ -49,7 +57,7 @@
 
 - (void)startGetRequest:(NSString *)url params:(NSDictionary *)params {
     [self prepareConnection];
-    [NQCommonRequest getRequestUrl:url
+    [CommonRequest getRequestUrl:url
                         parameters:params
                          WithBlock:^(id result, NSError *error) {
                              [self callback:result error:error];
@@ -58,7 +66,7 @@
 
 - (void)startPostRequest:(NSString *)url params:(NSDictionary *)params {
     [self prepareConnection];
-    [NQCommonRequest postRequestUrl:url
+    [CommonRequest postRequestUrl:url
                          parameters:params
                           WithBlock:^(id result, NSError *error) {
                               [self callback:result error:error];
@@ -67,7 +75,7 @@
 
 - (void)startUploadImage:(UIImage *)image url:(NSString *)url params:(NSDictionary *)params {
     [self prepareConnection];
-    [NQCommonRequest uploadImage:image
+    [CommonRequest uploadImage:image
                              url:url
                           params:params
                        WithBlock:^(id result, NSError *error) {
@@ -97,6 +105,7 @@
     
     if (error) {
         [self showErrorProgress];
+        self.errorBlock(error);
         return;
     }
     
@@ -125,18 +134,7 @@
  *  @return YES表示正确 / NO表示不正确
  */
 - (BOOL)checkResponse:(id)result {
-    
-    if (![result isKindOfClass:[NSDictionary class]])
-        return NO;
-    
-    NSDictionary *status = [result objectForKey:@"status"];
-    NSInteger code = [[status objectForKey:@"code"] integerValue];
-    
-    if (code != 0) {
-        return NO;
-    }
-    
-    return YES;
+    return NO;
 }
 
 /**
@@ -144,10 +142,10 @@
  */
 - (void)statusError {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"账号异常"
-                                                    message:@"其他用户登录了您的账号" delegate:nil
-                                          cancelButtonTitle:@"重新登录"
-                                          otherButtonTitles:@"修改密码", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"验证码不通过" delegate:nil
+                                          cancelButtonTitle:@"需要重写子类"
+                                          otherButtonTitles:nil, nil];
     
     [alert show];
 }
@@ -156,7 +154,7 @@
  *  状态码验证通过, 解析回调
  */
 - (void)statusSuccess:(id)result {
-    self.resultBlock([self parseResponse:result]);
+    self.successBlock([self parseResponse:result]);
 }
 
 /**
