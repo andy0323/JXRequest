@@ -90,3 +90,11 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 在Block中处理回调内容, result为数据源.
 
 
+## Contact
+**Email:** andy_ios@163.com
+
+
+##Licenses
+
+All source code is licensed under the [MIT License](https://github.com/andy0323/JXRequest/blob/master/LICENSE).
+
