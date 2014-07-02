@@ -11,9 +11,9 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 * 创建一个工程, 将src引入项目, 将lib引入项目
 * 进入Build Phases --> Compile Sources 配置混编环境
 
-### 2. 配置基类RootRequest
+### 2. 配置基类BaseRequest
 
-首先, 创建一个继承于JXRequest的基类RootRequest, 然后在RootRequest内重写init, 配置Loading时的相关信息
+首先, 创建一个继承于JXRequest的基类BaseRequest, 然后在BaseRequest内重写init, 配置Loading时的相关信息
 
 |         参数         |           参数内容         |
 | ---------------------| -------------------------|
@@ -53,7 +53,7 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 
 ### 2. 创建请求
 
-创建继承于RootRequest的请求类, 必须实现函数@selector(start)
+创建继承于BaseRequest的请求类, 必须实现函数@selector(start)
 
 例如:
 
