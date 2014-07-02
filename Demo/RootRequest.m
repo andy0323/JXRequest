@@ -33,6 +33,9 @@
 
 - (BOOL)checkResponse:(id)result {
     
+    NSInteger code = 1;
+    self.statusErrorBlock(1);
+    
     if (![result isKindOfClass:[NSDictionary class]])
     return NO;
      

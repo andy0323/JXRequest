@@ -82,6 +82,11 @@
         
     }];
     
+    [weatherRequest statusErrorCallback:^(NSInteger code) {
+       
+        NSLog(@"%ld", code);
+    }];
+    
     [weatherRequest start];
 }
 
