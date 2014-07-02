@@ -87,6 +87,6 @@ JXRequest是一个简单封装的类, 它引用了AFNetworking, SVProgress, 可�
 }
 
 ```
-在Block中处理回调内容
+在Block中处理回调内容, result为数据源.
 
 
