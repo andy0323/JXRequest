@@ -1,26 +1,11 @@
-#import "JXAppDelegate.h"
 #import "JXRequest.h"
-#import "SVProgressHUD.h"
 
-#define MESSAGE_LOAD    @"加载中.."
-#define MESSAGE_SUCCESS @"加载成功"
-#define MESSAGE_ERROR   @"加载失败"
-
-@implementation NQRootRequest
+@implementation JXRequest
 
 - (id)init {
     
     if (self = [super init]) {
         _params = [NSMutableDictionary dictionary];
-        
-        // 初始化SVProgressHUD相关参数
-        
-        _displayable = YES; // 显示控件
-        _hasMessage  = YES; // 显示内容
-        
-        _loadingMessage = MESSAGE_LOAD;
-        _successMessage = MESSAGE_SUCCESS;
-        _errorMessage   = MESSAGE_ERROR;
         
         _keyView = ((JXAppDelegate *)[UIApplication sharedApplication].delegate).window;
     }
@@ -125,18 +110,7 @@
  *  @return YES表示正确 / NO表示不正确
  */
 - (BOOL)checkResponse:(id)result {
-    
-    if (![result isKindOfClass:[NSDictionary class]])
-        return NO;
-    
-    NSDictionary *status = [result objectForKey:@"status"];
-    NSInteger code = [[status objectForKey:@"code"] integerValue];
-    
-    if (code != 0) {
-        return NO;
-    }
-    
-    return YES;
+    return NO;
 }
 
 /**
@@ -144,10 +118,10 @@
  */
 - (void)statusError {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"账号异常"
-                                                    message:@"其他用户登录了您的账号" delegate:nil
-                                          cancelButtonTitle:@"重新登录"
-                                          otherButtonTitles:@"修改密码", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"验证码不通过" delegate:nil
+                                          cancelButtonTitle:@"需要重写子类"
+                                          otherButtonTitles:nil, nil];
     
     [alert show];
 }

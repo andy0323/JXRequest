@@ -10,10 +10,12 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonRequest.h"
+#import "JXAppDelegate.h"
+#import "SVProgressHUD.h"
 
 typedef void (^ResultBlock)(id result);
 
-@interface NQRootRequest : NSObject {
+@interface JXRequest : NSObject {
     // 下载中的标示符
     BOOL _isLoading;
 }
@@ -63,6 +65,15 @@ typedef void (^ResultBlock)(id result);
 
 #pragma mark -
 #pragma mark - 继承类内部调用
+
+/**
+ *  检测数据状态码是否正确
+ *
+ *  @param result 获取的数据源
+ *
+ *  @return YES表示正确 / NO表示不正确
+ */
+- (BOOL)checkResponse:(id)result;
 
 /**
  *  状态码验证失败, 重写调用该函数

@@ -8,6 +8,8 @@
 
 #import "JXViewController.h"
 
+#import "JXWeatherRequest.h"
+
 @interface JXViewController ()<UITableViewDelegate,
     UITableViewDataSource>
 {
@@ -22,7 +24,7 @@
 @implementation JXViewController
 
 - (NSArray *)dataArray {
-    _dataArray = @[@"demoRequest"];
+    _dataArray = @[@"weatherRequest"];
     return _dataArray;
 }
 
@@ -63,6 +65,18 @@
     self.title = @"JXRequest";
     
     [self createTableView];
+}
+
+- (void)weatherRequest {
+    JXWeatherRequest *weatherRequest =[[JXWeatherRequest alloc] init];
+    
+    [weatherRequest resultBlock:^(id result) {
+       
+        NSLog(@"%@", result);
+    
+    }];
+    
+    [weatherRequest start];
 }
 
 @end
