@@ -68,14 +68,18 @@
 }
 
 - (void)weatherRequest {
-    JXWeatherRequest *weatherRequest =[[JXWeatherRequest alloc] init];
+    JXWeatherRequest *weatherRequest = [JXWeatherRequest request];
     
-    weatherRequest.address = @"金融街";
+    weatherRequest.address = @"西三旗";
     
-    [weatherRequest resultBlock:^(id result) {
+    [weatherRequest successCallback:^(id result) {
        
         NSLog(@"%@", result);
     
+    } errorCallback:^(NSError *error) {
+       
+        NSLog(@"%@", error);
+        
     }];
     
     [weatherRequest start];

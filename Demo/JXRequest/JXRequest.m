@@ -7,10 +7,20 @@
     if (self = [super init]) {
         _params = [NSMutableDictionary dictionary];
         
-        _keyView = ((JXAppDelegate *)[UIApplication sharedApplication].delegate).window;
+        _keyView = [UIApplication sharedApplication].delegate.window;
     }
     
     return self;
+}
+
+/**
+ *  类方法创建对象
+ *
+ *  @return 初始化对象
+ */
++ (id)request {
+    JXRequest *request = [[[self class] alloc] init];
+    return request;
 }
 
 #pragma mark -
@@ -19,14 +29,27 @@
 /**
  *  外部调用该函数, 获取解析完成的数据源
  */
-- (void)resultBlock:(void (^)(id))block {
-    self.resultBlock = block;
+- (void)successCallback:(void (^)(id))successBlock {
+    self.successBlock = successBlock;
+}
+
+- (void)errorCallback:(void (^)(NSError *error))errorBlock {
+    self.errorBlock = errorBlock;
+}
+
+- (void)successCallback:(void (^)(id))successBlock
+          errorCallback:(void (^)(NSError *error))errorBlock {
+    self.successBlock = successBlock;
+    self.errorBlock = errorBlock;
+}
+- (void)statusErrorCallback:(void (^)(NSInteger code))statusErrorBlock {
+    self.statusErrorBlock = statusErrorBlock;
 }
 
 /**
  *  开始请求
  */
-- (void)start {
+- (void)start{
 }
 
 #pragma mark -
@@ -82,6 +105,7 @@
     
     if (error) {
         [self showErrorProgress];
+        self.errorBlock(error);
         return;
     }
     
@@ -130,7 +154,7 @@
  *  状态码验证通过, 解析回调
  */
 - (void)statusSuccess:(id)result {
-    self.resultBlock([self parseResponse:result]);
+    self.successBlock([self parseResponse:result]);
 }
 
 /**

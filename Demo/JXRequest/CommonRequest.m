@@ -84,8 +84,8 @@
     return [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         [formData appendPartWithFileData :imageData
-                                     name:@"test"
-                                 fileName:@"test.png"
+                                     name:@"img"
+                                 fileName:@"img.png"
                                  mimeType:@"image/jpeg"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

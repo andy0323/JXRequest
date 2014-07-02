@@ -1,8 +1,7 @@
 /**
+ *  @title:  JXRequest
  *
- *  @title:  继承此类, 用于独立封装请求
- *
- *  @author: andy
+ *  @author: Jin JianXiang
  *
  *  @time:   2014.07.01
  *
@@ -13,7 +12,9 @@
 #import "JXAppDelegate.h"
 #import "SVProgressHUD.h"
 
-typedef void (^ResultBlock)(id result);
+typedef void (^SuccessBlock)(id result);
+typedef void (^ErrorBlock)(NSError *error);
+typedef void (^StatusErrorBlock)(NSInteger code);
 
 @interface JXRequest : NSObject {
     // 下载中的标示符
@@ -25,8 +26,9 @@ typedef void (^ResultBlock)(id result);
 // 请求参数
 @property (nonatomic, strong) NSMutableDictionary *params;
 // 数据回调
-@property (nonatomic, copy) ResultBlock resultBlock;
-
+@property (nonatomic, copy) SuccessBlock successBlock;
+@property (nonatomic, copy) ErrorBlock errorBlock;
+@property (nonatomic, copy) StatusErrorBlock statusErrorBlock;
 
 #pragma mark -
 #pragma mark - SVProgressHUD设置参数
@@ -51,11 +53,39 @@ typedef void (^ResultBlock)(id result);
 #pragma mark - 继承对象调用函数
 
 /**
+ *  类方法
+ *
+ *  @return 返回JXRequest对象
+ */
++ (id)request;
+
+/**
  *  请求结束 && 状态吗验证成功 (回调函数)
  *
- *  @param block 回调Block
+ *  @param block 回调block
  */
-- (void)resultBlock:(void (^)(id result))block;
+- (void)successCallback:(void (^)(id result))successBlock;
+
+/**
+ *  请求失败回调
+ *
+ *  @param block 回调block
+ */
+- (void)errorCallback:(void (^)(NSError *error))errorBlock;
+
+/**
+ *  设置回调
+ *
+ *  @param block 成功回调
+ *  @param block 失败回调
+ */
+- (void)successCallback:(void (^)(id))successBlock
+          errorCallback:(void (^)(NSError *error))errorBlock;
+
+/**
+ *  状态码错误回调
+ */
+- (void)statusErrorCallback:(void (^)(NSInteger code))statusErrorBlock;
 
 /**
  *  开始请求数据

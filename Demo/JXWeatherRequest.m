@@ -28,7 +28,7 @@
 }
 
 - (void)setAddress:(NSString *)address {
-    self.address = address;
+    _address = address;
     [self.params setObject:address forKeyedSubscript:@"address"];
 }
 
