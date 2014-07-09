@@ -4,8 +4,13 @@
 @implementation CommonRequest
 
 #pragma mark -
-#pragma mark - Show Methods
+#pragma mark - 共有函数
 
+/**
+ *  单例
+ *
+ *  @return 返回单例对象
+ */
 + (instancetype)sharedClient {
     static CommonRequest *_sharedClient = nil;
     static dispatch_once_t onceToken;
@@ -40,8 +45,7 @@
  */
 + (AFHTTPRequestOperation *)getRequestUrl:(NSString *)url parameters:(NSDictionary *)parameters WithBlock:(void (^)(id, NSError *))block {
     
-    return [[CommonRequest sharedClient] GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
-            {
+    return [[CommonRequest sharedClient] GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 if (block)
                     block(responseObject, nil);
                 
@@ -71,29 +75,18 @@
 }
 
 /**
- *  上传图片
+ *  上传文件
  */
-+ (AFHTTPRequestOperation *)uploadImage:(UIImage *)image url:(NSString *)url params:(NSDictionary *)params WithBlock:(void (^)(id result, NSError *error))block {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
++ (AFHTTPRequestOperation *)postRequestUrl:(NSString *)url params:(NSDictionary *)params FormData:(void (^)(id<AFMultipartFormData> formData))formBlock WithBlock:(void (^)(id result, NSError *error))block {
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    return [[CommonRequest sharedClient] POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-    // 上传图片
-    return [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        
-        [formData appendPartWithFileData :imageData
-                                     name:@"img"
-                                 fileName:@"img.png"
-                                 mimeType:@"image/jpeg"];
+        formBlock(formData);
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-        
         if (block)
-            block(json, nil);
+            block(responseObject, nil);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 

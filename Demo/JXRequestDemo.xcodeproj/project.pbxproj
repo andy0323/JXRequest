@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A120FC4A1963AB5B0040A4E5 /* RootRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A120FC491963AB5B0040A4E5 /* RootRequest.m */; };
-		A147800C1963A7D800718588 /* JXWeatherRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A147800B1963A7D800718588 /* JXWeatherRequest.m */; };
 		A147803E1963A7F400718588 /* CommonRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A147800F1963A7F400718588 /* CommonRequest.m */; };
 		A147803F1963A7F400718588 /* JXRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A14780111963A7F400718588 /* JXRequest.m */; };
 		A14780401963A7F400718588 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A14780161963A7F400718588 /* AFHTTPRequestOperation.m */; };
@@ -30,6 +29,9 @@
 		A14780501963A7F400718588 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A14780391963A7F400718588 /* UIWebView+AFNetworking.m */; };
 		A14780511963A7F400718588 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A147803B1963A7F400718588 /* SVProgressHUD.bundle */; };
 		A14780521963A7F400718588 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A147803D1963A7F400718588 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A17F4CBC196D3752008DCE76 /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4CBB196D3752008DCE76 /* LoginRequest.m */; };
+		A17F4CC2196D3C74008DCE76 /* UploadHeaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A17F4CC1196D3C74008DCE76 /* UploadHeaderRequest.m */; };
+		A17F4CC4196D3D75008DCE76 /* headView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A17F4CC3196D3D75008DCE76 /* headView@2x.png */; };
 		A1EA341919639EAC00CCB1CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EA341819639EAC00CCB1CE /* Foundation.framework */; };
 		A1EA341B19639EAC00CCB1CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EA341A19639EAC00CCB1CE /* CoreGraphics.framework */; };
 		A1EA341D19639EAC00CCB1CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EA341C19639EAC00CCB1CE /* UIKit.framework */; };
@@ -58,8 +60,6 @@
 /* Begin PBXFileReference section */
 		A120FC481963AB5B0040A4E5 /* RootRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootRequest.h; sourceTree = SOURCE_ROOT; };
 		A120FC491963AB5B0040A4E5 /* RootRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootRequest.m; sourceTree = SOURCE_ROOT; };
-		A147800A1963A7D800718588 /* JXWeatherRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXWeatherRequest.h; sourceTree = SOURCE_ROOT; };
-		A147800B1963A7D800718588 /* JXWeatherRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXWeatherRequest.m; sourceTree = SOURCE_ROOT; };
 		A147800E1963A7F400718588 /* CommonRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRequest.h; sourceTree = "<group>"; };
 		A147800F1963A7F400718588 /* CommonRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonRequest.m; sourceTree = "<group>"; };
 		A14780101963A7F400718588 /* JXRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXRequest.h; sourceTree = "<group>"; };
@@ -103,6 +103,11 @@
 		A147803B1963A7F400718588 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		A147803C1963A7F400718588 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		A147803D1963A7F400718588 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A17F4CBA196D3752008DCE76 /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = SOURCE_ROOT; };
+		A17F4CBB196D3752008DCE76 /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = SOURCE_ROOT; };
+		A17F4CC0196D3C74008DCE76 /* UploadHeaderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadHeaderRequest.h; sourceTree = SOURCE_ROOT; };
+		A17F4CC1196D3C74008DCE76 /* UploadHeaderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadHeaderRequest.m; sourceTree = SOURCE_ROOT; };
+		A17F4CC3196D3D75008DCE76 /* headView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "headView@2x.png"; sourceTree = "<group>"; };
 		A1EA341519639EAC00CCB1CE /* JXRequestDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JXRequestDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EA341819639EAC00CCB1CE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1EA341A19639EAC00CCB1CE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -242,8 +247,10 @@
 			children = (
 				A120FC481963AB5B0040A4E5 /* RootRequest.h */,
 				A120FC491963AB5B0040A4E5 /* RootRequest.m */,
-				A147800A1963A7D800718588 /* JXWeatherRequest.h */,
-				A147800B1963A7D800718588 /* JXWeatherRequest.m */,
+				A17F4CBA196D3752008DCE76 /* LoginRequest.h */,
+				A17F4CBB196D3752008DCE76 /* LoginRequest.m */,
+				A17F4CC0196D3C74008DCE76 /* UploadHeaderRequest.h */,
+				A17F4CC1196D3C74008DCE76 /* UploadHeaderRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -283,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EA342719639EAC00CCB1CE /* JXAppDelegate.h */,
+				A17F4CC3196D3D75008DCE76 /* headView@2x.png */,
 				A1EA342819639EAC00CCB1CE /* JXAppDelegate.m */,
 				A1EA348D1963A13500CCB1CE /* JXViewController.h */,
 				A1EA348E1963A13500CCB1CE /* JXViewController.m */,
@@ -399,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1EA342319639EAC00CCB1CE /* InfoPlist.strings in Resources */,
+				A17F4CC4196D3D75008DCE76 /* headView@2x.png in Resources */,
 				A14780511963A7F400718588 /* SVProgressHUD.bundle in Resources */,
 				A1EA342B19639EAC00CCB1CE /* Images.xcassets in Resources */,
 			);
@@ -420,9 +429,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A14780481963A7F400718588 /* AFURLSessionManager.m in Sources */,
-				A147800C1963A7D800718588 /* JXWeatherRequest.m in Sources */,
 				A1EA342919639EAC00CCB1CE /* JXAppDelegate.m in Sources */,
 				A14780431963A7F400718588 /* AFNetworkReachabilityManager.m in Sources */,
+				A17F4CC2196D3C74008DCE76 /* UploadHeaderRequest.m in Sources */,
 				A14780491963A7F400718588 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				A1EA342519639EAC00CCB1CE /* main.m in Sources */,
 				A14780451963A7F400718588 /* AFURLConnectionOperation.m in Sources */,
@@ -434,6 +443,7 @@
 				A147804D1963A7F400718588 /* UIImageView+AFNetworking.m in Sources */,
 				A1EA348F1963A13500CCB1CE /* JXViewController.m in Sources */,
 				A147803E1963A7F400718588 /* CommonRequest.m in Sources */,
+				A17F4CBC196D3752008DCE76 /* LoginRequest.m in Sources */,
 				A120FC4A1963AB5B0040A4E5 /* RootRequest.m in Sources */,
 				A147804B1963A7F400718588 /* UIAlertView+AFNetworking.m in Sources */,
 				A14780501963A7F400718588 /* UIWebView+AFNetworking.m in Sources */,

@@ -32,17 +32,18 @@
 }
 
 - (BOOL)checkResponse:(id)result {
-    
-    NSInteger code = 1;
-    self.statusErrorBlock(1);
-    
     if (![result isKindOfClass:[NSDictionary class]])
-    return NO;
-     
-    NSString *status = [result objectForKey:@"status"];
-    
-    if (![status isEqualToString:@"OK"])
         return NO;
+     
+    NSDictionary *status = [result objectForKey:@"status"];
+    NSInteger code = [[status objectForKey:@"code"] integerValue];
+    
+    if (code != 0) {
+        if (self.statusErrorBlock) {
+            self.statusErrorBlock(code);
+        }
+        return NO;
+    }
      
     return YES;
 }

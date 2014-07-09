@@ -16,10 +16,7 @@ typedef void (^SuccessBlock)(id result);
 typedef void (^ErrorBlock)(NSError *error);
 typedef void (^StatusErrorBlock)(NSInteger code);
 
-@interface JXRequest : NSObject {
-    // 下载中的标示符
-    BOOL _isLoading;
-}
+@interface JXRequest : NSObject 
 
 // 请求的链接
 @property (nonatomic, copy) NSString *url;
@@ -127,7 +124,8 @@ typedef void (^StatusErrorBlock)(NSInteger code);
  */
 - (void)startGetRequest:(NSString *)url params:(NSDictionary *)params;
 - (void)startPostRequest:(NSString *)url params:(NSDictionary *)params;
-- (void)startUploadImage:(UIImage *)image url:(NSString *)url params:(NSDictionary *)params;
+- (void)startPostRequest:(NSString *)url params:(NSDictionary *)params
+                   FormData:(void (^)(id<AFMultipartFormData> formData))formBlock;
 
 /**
  *  如果需要修改progressHUD的状态, 如offsetY 那么就在子类重写下面的函数

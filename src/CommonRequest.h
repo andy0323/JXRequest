@@ -8,7 +8,7 @@
 
 #import "AFHTTPRequestOperationManager.h"
 
-@interface NQCommonRequest : AFHTTPRequestOperationManager
+@interface CommonRequest : AFHTTPRequestOperationManager
 
 /**
  *  获取单例对象
@@ -45,6 +45,6 @@
  *
  *  @return result
  */
-+ (AFHTTPRequestOperation *)uploadImage:(UIImage *)image url:(NSString *)url params:(NSDictionary *)params WithBlock:(void (^)(id result, NSError *error))block;
++ (AFHTTPRequestOperation *)postRequestUrl:(NSString *)url params:(NSDictionary *)params FormData:(void (^)(id<AFMultipartFormData> formData))formBlock WithBlock:(void (^)(id result, NSError *error))block;
 
 @end

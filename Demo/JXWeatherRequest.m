@@ -23,13 +23,17 @@
 
 - (void)start {
     [self.params setObject:@"false" forKey:@"sensor"];
-
+    
     [self startGetRequest:self.url params:self.params];
 }
 
 - (void)setAddress:(NSString *)address {
     _address = address;
-    [self.params setObject:address forKeyedSubscript:@"address"];
+    [self.params setObject: address forKey: @"address"];
+}
+
+- (id)parseResponse:(id)result {
+    return @"Hellow";
 }
 
 @end

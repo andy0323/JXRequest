@@ -1,6 +1,15 @@
 #import "JXRequest.h"
 
+@interface JXRequest ()
+{
+    BOOL _isLoading;
+}
+@end
+
 @implementation JXRequest
+
+#pragma mark -
+#pragma mark - 构造函数
 
 - (id)init {
     
@@ -13,11 +22,6 @@
     return self;
 }
 
-/**
- *  类方法创建对象
- *
- *  @return 初始化对象
- */
 + (id)request {
     JXRequest *request = [[[self class] alloc] init];
     return request;
@@ -73,14 +77,16 @@
                           }];
 }
 
-- (void)startUploadImage:(UIImage *)image url:(NSString *)url params:(NSDictionary *)params {
+- (void)startPostRequest:(NSString *)url params:(NSDictionary *)params FormData:(void (^)(id<AFMultipartFormData> formData))formBlock {
     [self prepareConnection];
-    [CommonRequest uploadImage:image
-                             url:url
-                          params:params
-                       WithBlock:^(id result, NSError *error) {
-                           [self callback:result error:error];
-                          }];
+    [CommonRequest postRequestUrl:url
+                           params:params
+                         FormData:^(id<AFMultipartFormData> formData) {
+                             formBlock(formData);
+                         }
+                        WithBlock:^(id result, NSError *error) {
+                            [self callback:result error:error];
+                        }];
 }
 
 /**
@@ -105,7 +111,9 @@
     
     if (error) {
         [self showErrorProgress];
-        self.errorBlock(error);
+        if (self.errorBlock) {
+            self.errorBlock(error);
+        }
         return;
     }
     
@@ -154,7 +162,9 @@
  *  状态码验证通过, 解析回调
  */
 - (void)statusSuccess:(id)result {
-    self.successBlock([self parseResponse:result]);
+    if (self.successBlock) {
+        self.successBlock([self parseResponse:result]);
+    }
 }
 
 /**
@@ -181,7 +191,7 @@
 #pragma mark - 显示/不显示 SVProgress Message
 
 - (void)showLoadingProgress {
-    if (!_displayable)
+    if (_displayable)
         return;
     
     if (!_hasMessage)
@@ -190,7 +200,7 @@
         [self showLoading];
 }
 - (void)showSuccessProgress {
-    if (!_displayable)
+    if (_displayable)
         return;
     
     if (!_hasMessage)
@@ -199,7 +209,7 @@
         [self showSuccess];
 }
 - (void)showErrorProgress {
-    if (!_displayable)
+    if (_displayable)
         return;
     
     if (!_hasMessage)

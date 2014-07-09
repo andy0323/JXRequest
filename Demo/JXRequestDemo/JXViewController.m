@@ -8,14 +8,17 @@
 
 #import "JXViewController.h"
 
-#import "JXWeatherRequest.h"
+#import "LoginRequest.h"
+#import "UploadHeaderRequest.h"
 
 @interface JXViewController ()<UITableViewDelegate,
     UITableViewDataSource>
 {
     NSArray *_dataArray;
-
     UITableView *_tableView;
+    
+    NSString *_token;
+    NSString *_userId;
 }
 @property (nonatomic, strong) NSArray *dataArray;
 
@@ -24,7 +27,7 @@
 @implementation JXViewController
 
 - (NSArray *)dataArray {
-    _dataArray = @[@"weatherRequest"];
+    _dataArray = @[@"login", @"uploadHeaderIcon"];
     return _dataArray;
 }
 
@@ -67,27 +70,47 @@
     [self createTableView];
 }
 
-- (void)weatherRequest {
-    JXWeatherRequest *weatherRequest = [JXWeatherRequest request];
+- (void)login {
+    LoginRequest *request = [LoginRequest request];
+    request.username = @"11000490";
+    request.password = @"123456";
     
-    weatherRequest.address = @"西三旗";
-    
-    [weatherRequest successCallback:^(id result) {
-       
-        NSLog(@"%@", result);
-    
-    } errorCallback:^(NSError *error) {
-       
-        NSLog(@"%@", error);
+    [request successCallback:^(id result) {
+        
+        NSDictionary *data = [[result objectForKey:@"data"] lastObject];
+        _token = [data objectForKey:@"tokenId"];
+        _userId = [data objectForKey:@"id"];
         
     }];
     
-    [weatherRequest statusErrorCallback:^(NSInteger code) {
-       
-        NSLog(@"%ld", code);
+    [request statusErrorCallback:^(NSInteger code) {
+        NSLog(@"%d", code);
     }];
     
-    [weatherRequest start];
+    
+    [request start];
 }
 
+- (void)uploadHeaderIcon {
+    
+    UploadHeaderRequest *request = [UploadHeaderRequest request];
+    request.tokenId = _token;
+    request.userId = _userId;
+    
+    
+    [request successCallback:^(id result) {
+        NSLog(@"%@", result);
+    }];
+    
+    [request errorCallback:^(NSError *error) {
+        
+        NSLog(@"%@", error);
+    }];
+    
+    [request statusErrorCallback:^(NSInteger code) {
+        NSLog(@"%d", code);
+    }];
+    
+    [request start];
+}
 @end
