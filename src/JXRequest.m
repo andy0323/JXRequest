@@ -33,7 +33,7 @@
 /**
  *  外部调用该函数, 获取解析完成的数据源
  */
-- (void)successCallback:(void (^)(id))successBlock {
+- (void)successCallback:(void (^)(id result))successBlock {
     self.successBlock = successBlock;
 }
 
@@ -41,7 +41,7 @@
     self.errorBlock = errorBlock;
 }
 
-- (void)successCallback:(void (^)(id))successBlock
+- (void)successCallback:(void (^)(id result))successBlock
           errorCallback:(void (^)(NSError *error))errorBlock {
     self.successBlock = successBlock;
     self.errorBlock = errorBlock;
@@ -61,6 +61,7 @@
 
 - (void)startGetRequest:(NSString *)url params:(NSDictionary *)params {
     [self prepareConnection];
+    
     [CommonRequest getRequestUrl:url
                         parameters:params
                          WithBlock:^(id result, NSError *error) {
@@ -194,7 +195,7 @@
     if (_displayable)
         return;
     
-    if (!_hasMessage)
+    if (!_hasMessage || !self.loadingMessage)
         [SVProgressHUD showInView:self.keyView];
     else
         [self showLoading];
@@ -203,7 +204,7 @@
     if (_displayable)
         return;
     
-    if (!_hasMessage)
+    if (!_hasMessage || !self.successMessage)
         [SVProgressHUD dismiss];
     else
         [self showSuccess];
@@ -212,7 +213,7 @@
     if (_displayable)
         return;
     
-    if (!_hasMessage)
+    if (!_hasMessage || !self.errorMessage)
         [SVProgressHUD dismiss];
     else
         [self showError];

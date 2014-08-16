@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonRequest.h"
-#import "JXAppDelegate.h"
+#import "AppDelegate.h"
 #import "SVProgressHUD.h"
 
 typedef void (^SuccessBlock)(id result);
@@ -76,7 +76,7 @@ typedef void (^StatusErrorBlock)(NSInteger code);
  *  @param block 成功回调
  *  @param block 失败回调
  */
-- (void)successCallback:(void (^)(id))successBlock
+- (void)successCallback:(void (^)(id result))successBlock
           errorCallback:(void (^)(NSError *error))errorBlock;
 
 /**
